@@ -1,0 +1,26 @@
+{
+  "name": "are.na-ts-client",
+  "version": "1.0.0",
+  "description": "A lightweight javascript API wrapper for the Are.na API.",
+  "main": "index.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mleri/are.na-ts-client.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mleri/are.na-ts-client/issues"
+  },
+  "homepage": "https://github.com/mleri/are.na-ts-client#readme",
+  "dependencies": {
+    "axios": "^0.24.0"
+  },
+  "devDependencies": {
+    "typescript": "^4.5.4"
+  }
+}
