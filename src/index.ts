@@ -1,5 +1,6 @@
 import UserClass from "./entities/User"
 import BlockClass from "./entities/Block"
+import ChannelClass from "./entities/Channel"
 
 
 interface IArenaClient {
@@ -14,10 +15,14 @@ export class ArenaClient implements IArenaClient {
         return new UserClass(id)
     }
 
+    Channel(idOrSlug: number | string) {
+        return new ChannelClass(idOrSlug)
+    }
+
     Block(id: number) {
         return new BlockClass(id)
     }
 }
 
 
-(new ArenaClient().User(298758).getAttribtues()).then((attributes) => console.log(attributes))
+(new ArenaClient().Channel(`peleton-design`).getAttribtues()).then((res) => console.log(res))

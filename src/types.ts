@@ -1,6 +1,5 @@
 export type Classes = "User" | "Block" | "Image" | "Text" | "Link" | 'Media' | "Attachment" | "Channel"
 
-
 export interface Source {
     readonly url: string,
     readonly title: string | null,
@@ -72,6 +71,27 @@ export interface Block {
     readonly connections: Channel[]
 }
 
+export type UpdateBlockParams = Pick<Block, 'title' | 'description' | 'content' >
+
+export type PaginatedParams = {
+    per?: number,
+    page?: number,
+}
+
+export type EntityKeys = 'users' | 'channels' | 'blocks'
+
+export type PaginatedEntity<Entity extends EntityKeys, Class extends Classes, BaseClass extends Classes> = {
+    [key in Entity]: Channel[]
+} & PaginatedResponse<Class, BaseClass>
+
+export interface PaginatedResponse<Class extends Classes, BaseClass extends Classes> {
+    length: number,
+    total_Pages: number,
+    current_page: number,
+    per: number,
+    base_class: Extract<Classes, BaseClass>,
+    class: Extract<Classes, Class>
+}
 
 export interface Channel {
     readonly id: number,
