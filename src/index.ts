@@ -1,5 +1,5 @@
-import UserClass from "./Users"
-import BlockClass from "./Blocks"
+import UserClass from "./entities/User"
+import BlockClass from "./entities/Block"
 
 
 interface IArenaClient {

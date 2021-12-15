@@ -1,5 +1,5 @@
-import { User } from '../types'
-import { baseUrl, fetchObj } from '../util.common';
+import { User } from '../../types'
+import { baseUrl, fetchObj } from '../../util.common';
 
 interface IUserClass {
     id: number;

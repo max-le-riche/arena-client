@@ -1,5 +1,5 @@
-import { Block } from '../types'
-import { baseUrl, fetchObj } from '../util.common';
+import { Block } from '../../types'
+import { baseUrl, fetchObj } from '../../util.common';
 
 interface IBlockClass {
     id: number;
@@ -11,6 +11,4 @@ export default class BlockClass implements IBlockClass {
     constructor(id: number) {
         this.id = id
     }
-
-
 }
