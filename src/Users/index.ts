@@ -1,8 +1,14 @@
-import { baseUrl, Classes, fetchObj } from "../util.common";
-import { IUser, IUserResponse } from "./util";
+import { User } from '../types'
+import { baseUrl, fetchObj } from '../util.common';
 
+interface IUserClass {
+    id: number;
+    getAttribtues: () => Promise<User>
+    getChannels: (accessCode: string) => Promise<User>
+    getFollowers: (accessCode: string) => Promise<User>
+}
 
-export class User implements IUser {
+export default class UserClass implements IUserClass {
     id: number;
 
     constructor(id: number) {
@@ -10,14 +16,14 @@ export class User implements IUser {
     }
 
     getAttribtues()  {
-        return fetchObj<IUserResponse>(`${baseUrl}/users/${this.id}`, 'GET')
+        return fetchObj<User>(`${baseUrl}/users/${this.id}`, 'GET')
     }
 
     getChannels(accessCode: string)  {
-        return fetchObj<IUserResponse>(`${baseUrl}/users/${this.id}/channels`, 'GET')
+        return fetchObj<User>(`${baseUrl}/users/${this.id}/channels`, 'GET')
     }
 
     getFollowers(accessCode: string)  {
-        return fetchObj<IUserResponse>(`${baseUrl}/users/${this.id}/followers`, 'GET')
+        return fetchObj<User>(`${baseUrl}/users/${this.id}/followers`, 'GET')
     }
 }

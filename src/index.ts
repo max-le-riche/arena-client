@@ -1,12 +1,21 @@
-import { User } from "./Users";
-import { IArenaClient } from "./util.common";
+import UserClass from "./Users"
+import BlockClass from "./Blocks"
+
+
+interface IArenaClient {
+    User(id: number): UserClass
+}
 
 
 export class ArenaClient implements IArenaClient {
     constructor() {}
 
     User(id: number) {
-        return new User(id)
+        return new UserClass(id)
+    }
+
+    Block(id: number) {
+        return new BlockClass(id)
     }
 }
 
