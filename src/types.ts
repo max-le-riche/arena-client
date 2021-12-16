@@ -1,12 +1,14 @@
 export type Classes = "User" | "Block" | "Image" | "Text" | "Link" | 'Media' | "Attachment" | "Channel"
 
 export interface Source {
+    readonly [key: string]: any,
     readonly url: string,
     readonly title: string | null,
     readonly provider: Provider
 }
 
 export interface Image {
+    readonly [key: string]: any,
     readonly filename: string,
     readonly content_type: string,
     readonly updated_at: string,
@@ -22,17 +24,20 @@ export interface ImageSource {
 }
 
 export interface ImageOringal {
+    readonly [key: string]: any,
     readonly url: string,
     readonly file_size: number,
     readonly file_size_display: string
 }
 
 export interface Provider {
+    readonly [key: string]: any,
     readonly name: string,
     readonly url: string,
 }
 
 export interface User {
+    readonly [key: string]: any,
     readonly id: number,
     readonly slug: string,
     readonly username: string,
@@ -52,6 +57,7 @@ export interface User {
 }
 
 export interface Block {
+    readonly [key: string]: any,
     readonly id: number,
     readonly title: string | null,
     readonly updated_at: string,
@@ -90,6 +96,7 @@ export type PaginatedEntity<EntityKey extends EntityKeys, EntityValue, Class ext
 } & PaginatedResponse<Class, BaseClass>
 
 export interface PaginatedResponse<Class extends Classes, BaseClass extends Classes> {
+    readonly [key: string]: any,
     readonly length: number,
     readonly total_Pages: number,
     readonly current_page: number,
@@ -105,6 +112,7 @@ export interface ChannelParams  {
 }
 
 export interface Channel {
+    readonly [key: string]: any,
     readonly id: number,
     readonly title: string,
     readonly created_at: string,

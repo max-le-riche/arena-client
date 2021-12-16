@@ -1,11 +1,14 @@
 # Are.na API Wrapper 
 
-A typed lightweight javascript API wrapper for the [Are.na](https://dev.are.na/documentation) API. 
+A typed javascript wrapper for the [Are.na](https://dev.are.na/) API. Currently implements all but 3 endpoints in the [official documentation](https://dev.are.na/documentation).
+
+> __Note:__ Attributes returned from the API do not exactly match those within the documentation. As such there may be additional attributes returned from the API that are not defined within the types.
 
 ## Getting Started
 
-## Implemented Endpoints
+## Endpoints
 
+### Implemented
 | Entity  | Endpoint  | Function | Authenticated | Paginated |
 | :-----: | - | - | - | - |
 | **Users** | GET /v2/users/:id | User(_id_).get | - | - |
@@ -25,5 +28,22 @@ A typed lightweight javascript API wrapper for the [Are.na](https://dev.are.na/d
 | **Channel** | POST /v2/channels/:id/block | Channel(_idOrSlug_).addBlock | yes | - |
 | **Channel** | DELETE /v2/channels/:id/block/:id | Channel(_idOrSlug_).deleteBlock | yes | - |
 | **Channel** | GET /v2/channels/:id/collaborators | Channel(_idOrSlug_).getCollaborators | - | yes |
-| **Channel** | POST /v2/channels/:id/collaborators | Channel(_idOrSlug_).addCollaborators | - | yes |
-| **Channel** | DELETE /v2/channels/:id/collaborators | Channel(_idOrSlug_).deleteCollaborators | - | yes |
+| **Channel** | POST /v2/channels/:id/collaborators | Channel(_idOrSlug_).addCollaborators | yes | yes |
+| **Channel** | DELETE /v2/channels/:id/collaborators | Channel(_idOrSlug_).deleteCollaborators | yes | yes |
+
+<br>
+
+### Not Implemented
+| Entity  | Endpoint  | Reason |
+| :-----: | - | - |
+| **Channels** | GET /v2/channels/ | Successful request consistently responses with an error code of 500 |
+| **Channels** | PUT /v2/channels/:channel_id/blocks/:id/selection | Limited documentation on use case & how to form a request |
+| **Channels** | PUT /v2/channels/:slug/sort | Limited documentation on use case & how to form a request |
+
+<br>
+
+
+## Future Improvements
+
+- Unit test coverage
+- Under-go a discovery on the shape of the data returned from the API & update the types accordingly
