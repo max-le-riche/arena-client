@@ -15,6 +15,9 @@ A typed lightweight javascript API wrapper for the [Are.na](https://dev.are.na/d
 | **Block** | GET /v2/blocks/:id/channels | Block(_id_).getChannels | - | yes |
 | **Block** | PUT /v2/blocks/:id | Block(_id_).update | - | yes |
 | **Channel** | GET /v2/channels/:slug | Channel(_idOrSlug_).get | - | - |
-| **Channel** | PUT /v2/channels/:slug | Channel(_idOrSlug_).update | - | - |
-| **Channel** | DELETE /v2/channels/:slug | Channel(_idOrSlug_).delete | - | - |
-| **Channel** | POST /v2/channels | createChannel | - | - |
+| **Channel** | PUT /v2/channels/:slug | Channel(_idOrSlug_).update | yes | - |
+| **Channel** | DELETE /v2/channels/:slug | Channel(_idOrSlug_).delete | yes | - |
+| **Channel** | POST /v2/channels | createChannel | yes | - |
+| **Channel** | GET /v2/channels | createChannel | yes | - |
+| **Channel** | GET /v2/channels/:id/connections | Channel(_idOrSlug_).getConnections | - | yes |
+| **Channel** | GET /v2/channels/:id/channels | Channel(_idOrSlug_).getChannels | - | yes |
