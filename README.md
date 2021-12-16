@@ -8,10 +8,35 @@ A typed javascript wrapper for the [Are.na](https://dev.are.na/) API. Currently 
 ```
     npm install arena-client
 ```
+or
 ```
     yarn add arena-client
 ```
 
+## Example Useage
+```js
+import { ArenaClient } from 'arena-client'
+
+// Initialize Objects
+const arena = new ArenaClient()
+const channel = arena.Channel('arena-influences')
+
+// Generic Request
+const channelAttributes = await channel.get()
+
+// Authenticated Request
+const newBlock = await channel.addBlock(process.env.ACCESS_TOKEN, {
+        type: 'Text',
+        data: 'Morbi vel ultrices elit, non blandit massa.'
+    })
+
+// Paginated Request
+const content = await channel.getContent({
+    page: 2,
+    per: 5
+})
+
+```
 ## Endpoints
 
 ### Implemented

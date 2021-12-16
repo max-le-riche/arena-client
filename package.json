@@ -1,8 +1,9 @@
 {
-  "name": "are.na-ts-client",
+  "name": "arena-client",
   "version": "1.0.0",
   "description": "A lightweight javascript API wrapper for the Are.na API.",
-  "main": "index.ts",
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
   "scripts": {
     "build": "tsc",
     "test": "npm run test"
