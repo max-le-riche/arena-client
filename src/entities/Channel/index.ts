@@ -15,17 +15,35 @@ interface IChannelClass {
     deleteCollaborators: (accessCode: string, toDelete: number[]) => Promise<PaginatedEntity<'users', User, 'User', 'User'>>
 }
 
+/**
+    @class Class that implements methods to abstract 
+    API endpoints associated with the Channel resource
+*/
 export default class ChannelClass implements IChannelClass {
     idOrSlug: number | string;
 
+    /**
+        @constructor Initialises and returns a Channel object 
+        @param {number | string} idOrSlug - The Arena slug or ID of the Channel being initialised
+    */
     constructor(idOrSlug: number | string) {
         this.idOrSlug = idOrSlug
     }
 
+    /**
+     * Function to get and return the Channels the attributes.
+     * @function
+    */
     get() {
         return fetchObj<Channel>({ url: `${baseUrl}/channels/${this.idOrSlug}`, method: 'GET' })
     }
 
+    /**
+     * Function to get and return the Channels the attributes
+     * @function
+     * @param {accessCode} string - Oauth access code to perform the authenticated request.\
+     * @param {Partial<ChannelParams>} params - Channel attributes and values to be updated
+    */
     update(accessCode: string, params: Partial<ChannelParams>) {
         return fetchObj<Channel>({
             url: `${baseUrl}/channels/${this.idOrSlug}`,
@@ -36,6 +54,11 @@ export default class ChannelClass implements IChannelClass {
         })
     }
 
+    /**
+     * Function to permenantly delete the Channel (does not cascade to resources)
+     * @function
+     * @param {accessCode} string - Oauth access code to perform the authenticated request.\
+    */
     delete(accessCode: string) {
         return fetchObj<void>({
             url: `${baseUrl}/channels/${this.idOrSlug}`,
@@ -46,6 +69,11 @@ export default class ChannelClass implements IChannelClass {
         })
     }
 
+     /**
+     * Function to get and return a paginated response containing the Channels connections
+     * @function
+     * @param {params} PaginatedParams - optional pagination parameters to query with
+    */
     getConnections(params?: PaginatedParams) {
         return fetchObj<PaginatedEntity<'channels', Channel, 'Channel', 'Channel'>>({
             url: `${baseUrl}/channels/${this.idOrSlug}/connections`,
@@ -54,6 +82,11 @@ export default class ChannelClass implements IChannelClass {
         })
     }
 
+     /**
+     * Function to get and return a paginated response containing the Channels connections
+     * @function
+     * @param {params} PaginatedParams - optional pagination parameters to query with
+    */
     getChannels(params?: PaginatedParams) {
         return fetchObj<PaginatedEntity<'channels', Channel, 'Channel', 'Channel'>>({
             url: `${baseUrl}/channels/${this.idOrSlug}/channels`,
@@ -62,6 +95,11 @@ export default class ChannelClass implements IChannelClass {
         })
     }
 
+    /**
+     * Function to get and return a paginated response containing the Channels content
+     * @function 
+     * @param {params} PaginatedParams - optional pagination parameters to query with
+    */
     getContent(params?: PaginatedParams) {
         return fetchObj<PaginatedEntity<'contents', Block, 'Channel', 'Channel'>>({
             url: `${baseUrl}/channels/${this.idOrSlug}/contents`,
@@ -70,6 +108,12 @@ export default class ChannelClass implements IChannelClass {
         })
     }
 
+    /**
+     * Function to add a new Block to the Channel
+     * @function 
+     * @param {accessCode} string - OAtuh access code to perform the authenticated request.
+     * @param {NewBlock} toAdd - object to define type & data of the new Block
+    */
     addBlock(accessCode: string, toAdd: NewBlock) {
         switch (toAdd.type) {
             case "Text":
@@ -97,6 +141,12 @@ export default class ChannelClass implements IChannelClass {
         }
     }
 
+    /**
+     * Function to add a new Block to the Channel
+     * @function 
+     * @param {accessCode} string - OAtuh access code to perform the authenticated request.
+     * @param {NewBlock} toAdd - object to define type & data of the new Block
+    */
     deleteBlock(accessCode: string, id: number) {
         return fetchObj<void>({
             url: `${baseUrl}/channels/${this.idOrSlug}/blocks/${id}`,

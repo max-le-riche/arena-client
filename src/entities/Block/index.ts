@@ -8,6 +8,10 @@ interface IBlockClass {
     getChannels: (params?: PaginatedParams) => Promise<PaginatedEntity<'channels', Channel, 'Block', 'Text'>>
 }
 
+/**
+    @class Class that implements methods to abstract 
+    API endpoints associated with the Block resource
+*/
 export default class BlockClass implements IBlockClass {
     id: number;
 
