@@ -1,5 +1,5 @@
-import { Block, Channel, ChannelParams, NewBlock, PaginatedEntity, PaginatedParams } from "../../types";
-import { baseUrl, fetchObj } from "../../util.common";
+import { Block, Channel, ChannelParams, NewBlock, PaginatedEntity, PaginatedParams, User } from "../../types";
+import { baseUrl, fetchObj, serialisedURL } from "../../util.common";
 
 interface IChannelClass {
     idOrSlug: number | string;
@@ -10,7 +10,9 @@ interface IChannelClass {
     getChannels: (params?: PaginatedParams) => Promise<PaginatedEntity<'channels', Channel, 'Channel', 'Channel'>>
     addBlock: (accessCode: string, data: NewBlock) => Promise<Block>
     deleteBlock: (accessCode: string, id: number) => Promise<void>
-
+    getCollaborators: (params?: PaginatedParams) => Promise<PaginatedEntity<'users', User, 'User', 'User'>>
+    addCollaborators: (accessCode: string, toAdd: number[]) => Promise<PaginatedEntity<'users', User, 'User', 'User'>>
+    deleteCollaborators: (accessCode: string, toDelete: number[]) => Promise<PaginatedEntity<'users', User, 'User', 'User'>>
 }
 
 export default class ChannelClass implements IChannelClass {
@@ -98,6 +100,34 @@ export default class ChannelClass implements IChannelClass {
     deleteBlock(accessCode: string, id: number) {
         return fetchObj<void>({
             url: `${baseUrl}/channels/${this.idOrSlug}/blocks/${id}`,
+            method: 'DELETE',
+            headers: {
+                Authorization: `Bearer ${accessCode}`
+            }
+        })
+    }
+
+    getCollaborators(params?: PaginatedParams) {
+        return fetchObj<PaginatedEntity<'users', User, 'User', 'User'>>({
+            url: `${baseUrl}/channels/${this.idOrSlug}/collaborators`,
+            method: 'GET',
+            params: params
+        })
+    }
+
+    addCollaborators(accessCode: string, toAdd: number[]) {            
+        return fetchObj<PaginatedEntity<'users', User, 'User', 'User'>>({
+            url: serialisedURL(`${baseUrl}/channels/${this.idOrSlug}/collaborators`,toAdd ),
+            method: 'POST',
+            headers: {
+                Authorization: `Bearer ${accessCode}`
+            }
+        })
+    }
+
+    deleteCollaborators(accessCode: string, toAdd: number[]) {
+        return fetchObj<PaginatedEntity<'users', User, 'User', 'User'>>({
+            url: serialisedURL(`${baseUrl}/channels/${this.idOrSlug}/collaborators`,toAdd ),
             method: 'DELETE',
             headers: {
                 Authorization: `Bearer ${accessCode}`

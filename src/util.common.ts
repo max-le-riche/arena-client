@@ -8,3 +8,13 @@ export function fetchObj<T>(config: AxiosRequestConfig) {
         throw err
     } )
 }
+
+export function serialisedURL(url: string, ids: number[]) {
+    if (ids.length)
+        url += `?${serialiseIds(ids)}`
+    return url
+}
+
+function serialiseIds(ids: number[]) {
+    return encodeURI(ids.map((v) => `ids[]=${v}`).join('&'))
+}
