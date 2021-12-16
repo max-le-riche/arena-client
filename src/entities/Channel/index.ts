@@ -1,4 +1,4 @@
-import { Block, Channel, ChannelParams, PaginatedEntity, PaginatedParams } from "../../types";
+import { Block, Channel, ChannelParams, NewBlock, PaginatedEntity, PaginatedParams } from "../../types";
 import { baseUrl, fetchObj } from "../../util.common";
 
 interface IChannelClass {
@@ -8,6 +8,8 @@ interface IChannelClass {
     delete: (accessCode: string) => Promise<void>
     getConnections: (params?: PaginatedParams) => Promise<PaginatedEntity<'channels', Channel, 'Channel', 'Channel'>>
     getChannels: (params?: PaginatedParams) => Promise<PaginatedEntity<'channels', Channel, 'Channel', 'Channel'>>
+    addBlock: (accessCode: string, data: NewBlock) => Promise<Block>
+    deleteBlock: (accessCode: string, id: number) => Promise<void>
 
 }
 
@@ -63,6 +65,43 @@ export default class ChannelClass implements IChannelClass {
             url: `${baseUrl}/channels/${this.idOrSlug}/contents`,
             method: 'GET',
             params: params
+        })
+    }
+
+    addBlock(accessCode: string, toAdd: NewBlock) {
+        switch (toAdd.type) {
+            case "Text":
+                return fetchObj<Block>({
+                    url: `${baseUrl}/channels/${this.idOrSlug}/blocks`,
+                    method: 'POST',
+                    params: {
+                        content: toAdd.data
+                    },
+                    headers: {
+                        Authorization: `Bearer ${accessCode}`
+                    }
+                })
+            case 'Source':
+                return fetchObj<Block>({
+                    url: `${baseUrl}/channels/${this.idOrSlug}/blocks`,
+                    method: 'POST',
+                    params: {
+                        source: toAdd.data
+                    },
+                    headers: {
+                        Authorization: `Bearer ${accessCode}`
+                    }
+                })
+        }
+    }
+
+    deleteBlock(accessCode: string, id: number) {
+        return fetchObj<void>({
+            url: `${baseUrl}/channels/${this.idOrSlug}/blocks/${id}`,
+            method: 'DELETE',
+            headers: {
+                Authorization: `Bearer ${accessCode}`
+            }
         })
     }
 }

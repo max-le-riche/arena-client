@@ -73,6 +73,11 @@ export interface Block {
 
 export type UpdateBlockParams = Pick<Block, 'title' | 'description' | 'content' >
 
+export interface NewBlock {
+    type: "Text" | "Source"
+    data: string
+}
+
 export type PaginatedParams = {
     per?: number,
     page?: number,

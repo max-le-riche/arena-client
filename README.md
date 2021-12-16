@@ -22,3 +22,5 @@ A typed lightweight javascript API wrapper for the [Are.na](https://dev.are.na/d
 | **Channel** | GET /v2/channels/:id/connections | Channel(_idOrSlug_).getConnections | - | yes |
 | **Channel** | GET /v2/channels/:id/channels | Channel(_idOrSlug_).getChannels | - | yes |
 | **Channel** | GET /v2/channels/:id/contents | Channel(_idOrSlug_).getContent | - | yes |
+| **Channel** | POST /v2/channels/:id/block | Channel(_idOrSlug_).addBlock | yes | - |
+| **Channel** | DELETE /v2/channels/:id/block/:id | Channel(_idOrSlug_).deleteBlock | yes | - |
