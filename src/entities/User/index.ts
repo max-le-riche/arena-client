@@ -3,7 +3,7 @@ import { baseUrl, fetchObj } from '../../util.common';
 
 interface IUserClass {
     id: number;
-    getAttribtues: () => Promise<User>
+    get: () => Promise<User>
     getChannels: (accessCode: string) => Promise<PaginatedEntity<'channels', 'User', 'User'>>
     getFollowers: (accessCode: string) => Promise<PaginatedEntity<'users', 'User', 'User'>>
 }
@@ -15,7 +15,7 @@ export default class UserClass implements IUserClass {
         this.id = id
     }
 
-    getAttribtues() {
+    get() {
         return fetchObj<User>({ url: `${baseUrl}/users/${this.id}`, params: 'GET' })
     }
 

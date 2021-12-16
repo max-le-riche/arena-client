@@ -93,6 +93,12 @@ export interface PaginatedResponse<Class extends Classes, BaseClass extends Clas
     class: Extract<Classes, Class>
 }
 
+export type ChannelStatus = 'public' | 'closed' | 'private'
+export interface ChannelParams  {
+    title: string,
+    status?: ChannelStatus  
+}
+
 export interface Channel {
     readonly id: number,
     readonly title: string,
@@ -105,7 +111,7 @@ export interface Channel {
     readonly slug: string,
     readonly length: 3,
     readonly kind: string,
-    readonly status: string,
+    readonly status: ChannelStatus,
     readonly user_id: number,
     readonly metadata: null,
     readonly share_link: string | null,
