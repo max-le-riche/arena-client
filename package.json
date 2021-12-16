@@ -1,7 +1,10 @@
 {
   "name": "arena-client",
-  "version": "1.0.0",
-  "description": "A lightweight javascript API wrapper for the Are.na API.",
+  "version": "1.0.1",
+  "description": "A typed javascript wrapper for the Are.na API.",
+  "files": [
+    "lib"
+  ],
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "scripts": {
