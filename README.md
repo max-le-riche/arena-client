@@ -1,10 +1,16 @@
 # Are.na API Wrapper 
 
-A typed javascript wrapper for the [Are.na](https://dev.are.na/) API. Currently implements all but 3 endpoints in the [official documentation](https://dev.are.na/documentation).
+A typed javascript wrapper for the [Are.na](https://dev.are.na/) API. Currently implements all but 3 endpoints listed in the [official documentation](https://dev.are.na/documentation).
 
 > __Note:__ Attributes returned from the API do not exactly match those within the documentation. As such there may be additional attributes returned from the API that are not defined within the types.
 
-## Getting Started
+## Installation
+```
+    npm install arena-client
+```
+```
+    yarn add arena-client
+```
 
 ## Endpoints
 
@@ -41,7 +47,6 @@ A typed javascript wrapper for the [Are.na](https://dev.are.na/) API. Currently 
 | **Channels** | PUT /v2/channels/:slug/sort | Limited documentation on use case & how to form a request |
 
 <br>
-
 
 ## Future Improvements
 
