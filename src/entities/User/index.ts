@@ -1,11 +1,11 @@
-import { PaginatedEntity, User } from '../../types'
+import { Channel, PaginatedEntity, User } from '../../types'
 import { baseUrl, fetchObj } from '../../util.common';
 
 interface IUserClass {
     id: number;
     get: () => Promise<User>
-    getChannels: (accessCode: string) => Promise<PaginatedEntity<'channels', 'User', 'User'>>
-    getFollowers: (accessCode: string) => Promise<PaginatedEntity<'users', 'User', 'User'>>
+    getChannels: (accessCode: string) => Promise<PaginatedEntity<'channels', Channel, 'User', 'User'>>
+    getFollowers: (accessCode: string) => Promise<PaginatedEntity<'users', User, 'User', 'User'>>
 }
 
 export default class UserClass implements IUserClass {
@@ -20,7 +20,7 @@ export default class UserClass implements IUserClass {
     }
 
     getChannels(accessCode: string) {
-        return fetchObj<PaginatedEntity<'channels', 'User', 'User'>>({
+        return fetchObj<PaginatedEntity<'channels', Channel, 'User', 'User'>>({
             url: `${baseUrl}/users/${this.id}/channels`, params: 'GET', headers: {
                 Authorization: `Bearer ${accessCode}`
             }
@@ -28,7 +28,7 @@ export default class UserClass implements IUserClass {
     }
 
     getFollowers(accessCode: string) {
-        return fetchObj<PaginatedEntity<'users', 'User', 'User'>>({
+        return fetchObj<PaginatedEntity<'users', User, 'User', 'User'>>({
             url: `${baseUrl}/users/${this.id}/followers`, params: 'GET', headers: {
                 Authorization: `Bearer ${accessCode}`
             }

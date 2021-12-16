@@ -6,8 +6,10 @@ import { fetchObj, baseUrl } from "./util.common"
 
 
 interface IArenaClient {
-    
     User(id: number): UserClass
+    Channel(id: number): ChannelClass
+    Block(id: number): BlockClass
+    createChannel(accessCode: string, params: ChannelParams): Promise<Channel> 
 }
 
 

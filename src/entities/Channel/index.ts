@@ -1,4 +1,4 @@
-import { Channel, ChannelParams, PaginatedEntity, PaginatedParams } from "../../types";
+import { Block, Channel, ChannelParams, PaginatedEntity, PaginatedParams } from "../../types";
 import { baseUrl, fetchObj } from "../../util.common";
 
 interface IChannelClass {
@@ -6,8 +6,8 @@ interface IChannelClass {
     get: () => Promise<Channel>
     update: (accessCode: string, params: Partial<ChannelParams>) => Promise<Channel>
     delete: (accessCode: string) => Promise<void>
-    getConnections: (params?: PaginatedParams) => Promise<PaginatedEntity<'channels', 'Channel', 'Channel'>>
-    getChannels: (params?: PaginatedParams) => Promise<PaginatedEntity<'channels', 'Channel', 'Channel'>>
+    getConnections: (params?: PaginatedParams) => Promise<PaginatedEntity<'channels', Channel, 'Channel', 'Channel'>>
+    getChannels: (params?: PaginatedParams) => Promise<PaginatedEntity<'channels', Channel, 'Channel', 'Channel'>>
 
 }
 
@@ -43,7 +43,7 @@ export default class ChannelClass implements IChannelClass {
     }
 
     getConnections(params?: PaginatedParams) {
-        return fetchObj<PaginatedEntity<'channels', 'Channel', 'Channel'>>({
+        return fetchObj<PaginatedEntity<'channels', Channel, 'Channel', 'Channel'>>({
             url: `${baseUrl}/channels/${this.idOrSlug}/connections`,
             method: 'GET',
             params: params
@@ -51,8 +51,16 @@ export default class ChannelClass implements IChannelClass {
     }
 
     getChannels(params?: PaginatedParams) {
-        return fetchObj<PaginatedEntity<'channels', 'Channel', 'Channel'>>({
+        return fetchObj<PaginatedEntity<'channels', Channel, 'Channel', 'Channel'>>({
             url: `${baseUrl}/channels/${this.idOrSlug}/channels`,
+            method: 'GET',
+            params: params
+        })
+    }
+
+    getContent(params?: PaginatedParams) {
+        return fetchObj<PaginatedEntity<'contents', Block, 'Channel', 'Channel'>>({
+            url: `${baseUrl}/channels/${this.idOrSlug}/contents`,
             method: 'GET',
             params: params
         })

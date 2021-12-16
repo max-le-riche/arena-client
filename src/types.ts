@@ -78,19 +78,19 @@ export type PaginatedParams = {
     page?: number,
 }
 
-export type EntityKeys = 'users' | 'channels' | 'blocks'
+export type EntityKeys = 'users' | 'channels' | 'blocks' | 'contents'
 
-export type PaginatedEntity<Entity extends EntityKeys, Class extends Classes, BaseClass extends Classes> = {
-    [key in Entity]: Channel[]
+export type PaginatedEntity<EntityKey extends EntityKeys, EntityValue, Class extends Classes, BaseClass extends Classes> = {
+    [key in EntityKey]: EntityValue[]
 } & PaginatedResponse<Class, BaseClass>
 
 export interface PaginatedResponse<Class extends Classes, BaseClass extends Classes> {
-    length: number,
-    total_Pages: number,
-    current_page: number,
-    per: number,
-    base_class: Extract<Classes, BaseClass>,
-    class: Extract<Classes, Class>
+    readonly length: number,
+    readonly total_Pages: number,
+    readonly current_page: number,
+    readonly per: number,
+    readonly base_class: Extract<Classes, BaseClass>,
+    readonly class: Extract<Classes, Class>
 }
 
 export type ChannelStatus = 'public' | 'closed' | 'private'

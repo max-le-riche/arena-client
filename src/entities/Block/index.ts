@@ -5,7 +5,7 @@ interface IBlockClass {
     id: number;
     get: () => Promise<Block>
     update: (params?: UpdateBlockParams) => Promise<Block>
-    getChannels: (params?: PaginatedParams) => Promise<PaginatedEntity<'channels', 'Block', 'Text'>>
+    getChannels: (params?: PaginatedParams) => Promise<PaginatedEntity<'channels', Channel, 'Block', 'Text'>>
 }
 
 export default class BlockClass implements IBlockClass {
@@ -26,7 +26,7 @@ export default class BlockClass implements IBlockClass {
     }
 
     getChannels(params?: PaginatedParams) {
-        return fetchObj<PaginatedEntity<'channels', 'Block', 'Text'>>(
+        return fetchObj<PaginatedEntity<'channels', Channel, 'Block', 'Text'>>(
             { url: `${baseUrl}/blocks/${this.id}/channels`, method: 'GET', params: params }
         )
     }
