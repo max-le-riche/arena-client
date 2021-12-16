@@ -13,7 +13,7 @@ or
     yarn add arena-client
 ```
 
-## Example Useage
+## Example Usage
 ```js
 import { ArenaClient } from 'arena-client'
 
